@@ -1,8 +1,13 @@
 {
   "name": "@mdupree/cypress-staged",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Cypress test runner, test staged files",
-  "main": "index.js",
+  "bin": {
+    "cypress-staged": "bin/cypress-staged.js"
+  },
+  "files": [
+    "bin/**"
+  ],
   "scripts": {
     "dev": "./bin/cypress-staged.js",
     "build": "tsc",
