@@ -1,14 +1,16 @@
 {
-  "name": "cypress-staged",
+  "name": "@mdupree/cypress-staged",
   "version": "0.0.1",
-  "description": "",
+  "description": "Cypress test runner, test staged files",
   "main": "index.js",
   "scripts": {
     "dev": "./bin/cypress-staged.js",
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "cypress"
+  ],
   "author": "mdupree mikerdupree@gmail.com",
   "license": "ISC",
   "devDependencies": {
@@ -32,5 +34,8 @@
     "@esm2cjs/execa": "6.1.1-cjs.1",
     "fast-glob": "^3.2.12",
     "glob": "^8.1.0"
+  },
+  "peerDependencies": {
+    "cypress": "^12.4.1"
   }
 }
