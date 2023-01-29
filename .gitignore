@@ -1,3 +1,5 @@
 node_modules
-cypress/video
-cypress/screenshots
+**/cypress/video
+**/cypress/screenshots
+bin
+bin/**
