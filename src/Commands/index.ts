@@ -1,3 +1,5 @@
+import fs from 'fs';
+import path from 'path';
 import { execa } from '@esm2cjs/execa';
 import fg from 'fast-glob';
 import { Config } from '../utils/config';
@@ -69,6 +71,7 @@ async function run(config: Config) {
     const specArgs = testPath.testPaths.join(',')
     console.log('\x1b[33mproject: \n %s\x1b[0m', project);
     console.log('\x1b[36mfiles: \n %s\x1b[0m', specArgs);
+
     if (types.includes('e2e')) {
       execa('cypress', [
         'run', '--spec', specArgs
@@ -77,7 +80,7 @@ async function run(config: Config) {
 
     if (types.includes('component')) {
       execa('cypress', [
-        'run', '--component', '--spec', specArgs 
+        'run', '--component', '--spec', specArgs
       ], { cwd: `${project}` })?.stdout?.pipe(process.stdout);
     }
   }

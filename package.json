@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "dev": "./bin/cypress-staged.js",
-    "build": "tsc",
+    "build": "tsc && copyfiles -u 1 src/staged.txt bin",
     "test": "echo \"Error: no test specified\" && exit 1",
     "pre-publish": "tsc"
   },
@@ -28,6 +28,7 @@
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react": "^3.0.1",
+    "copyfiles": "^2.4.1",
     "cypress": "^12.4.1",
     "husky": "^8.0.3",
     "react": "^18.2.0",
