@@ -1,6 +1,6 @@
 import { execa } from '@esm2cjs/execa';
 import fg from 'fast-glob';
-import {Config} from '../utils/config';
+import { Config } from '../utils/config';
 
 interface TestPath {
   project: string;
@@ -8,7 +8,7 @@ interface TestPath {
 }
 
 async function run(config: Config) {
-  const { include, projectsPath } = config;
+  const { include, projectsPath, types } = config;
 
   // Config useful for monorepos with multiple projects,
   // each with their own config
@@ -64,15 +64,22 @@ async function run(config: Config) {
   }
 
   // Run the tests for the staged files.
-  console.log('Test paths found: \n \x1b[32m%s\x1b[0m', pathsToTest);
   for (const testPath of pathsToTest) {
-    execa('cypress', [
-      'run', '--spec', testPath.testPaths.join(',')
-    ], { cwd: `${testPath.project}` })?.stdout?.pipe(process.stdout);
+    const project = testPath.project;
+    const specArgs = testPath.testPaths.join(',')
+    console.log('\x1b[33mproject: \n %s\x1b[0m', project);
+    console.log('\x1b[36mfiles: \n %s\x1b[0m', specArgs);
+    if (types.includes('e2e')) {
+      execa('cypress', [
+        'run', '--spec', specArgs
+      ], { cwd: `${project}` })?.stdout?.pipe(process.stdout);
+    }
 
-    execa('cypress', [
-      'run', '--component', '--spec', testPath.testPaths.join(',')
-    ], { cwd: `${testPath.project}` })?.stdout?.pipe(process.stdout);
+    if (types.includes('component')) {
+      execa('cypress', [
+        'run', '--component', '--spec', specArgs 
+      ], { cwd: `${project}` })?.stdout?.pipe(process.stdout);
+    }
   }
 
 }

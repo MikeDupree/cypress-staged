@@ -8,7 +8,7 @@ const execa_1 = require("@esm2cjs/execa");
 const fast_glob_1 = __importDefault(require("fast-glob"));
 async function run(config) {
     var _a, _b, _c, _d;
-    const { include, projectsPath } = config;
+    const { include, projectsPath, types } = config;
     const projectDirs = fast_glob_1.default.sync(`${projectsPath}/`, { onlyDirectories: true });
     const { stdout } = await (0, execa_1.execa)('git', ['diff', '--name-only', '--cached']);
     const files = stdout.split(/\r\n|\n|\r/);
@@ -44,14 +44,21 @@ async function run(config) {
             }
         }
     }
-    console.log('Test paths found: \n \x1b[32m%s\x1b[0m', pathsToTest);
     for (const testPath of pathsToTest) {
-        (_b = (_a = (0, execa_1.execa)('cypress', [
-            'run', '--spec', testPath.testPaths.join(',')
-        ], { cwd: `${testPath.project}` })) === null || _a === void 0 ? void 0 : _a.stdout) === null || _b === void 0 ? void 0 : _b.pipe(process.stdout);
-        (_d = (_c = (0, execa_1.execa)('cypress', [
-            'run', '--component', '--spec', testPath.testPaths.join(',')
-        ], { cwd: `${testPath.project}` })) === null || _c === void 0 ? void 0 : _c.stdout) === null || _d === void 0 ? void 0 : _d.pipe(process.stdout);
+        const project = testPath.project;
+        const specArgs = testPath.testPaths.join(',');
+        console.log('\x1b[33mproject: \n %s\x1b[0m', project);
+        console.log('\x1b[36mfiles: \n %s\x1b[0m', specArgs);
+        if (types.includes('e2e')) {
+            (_b = (_a = (0, execa_1.execa)('cypress', [
+                'run', '--spec', specArgs
+            ], { cwd: `${project}` })) === null || _a === void 0 ? void 0 : _a.stdout) === null || _b === void 0 ? void 0 : _b.pipe(process.stdout);
+        }
+        if (types.includes('component')) {
+            (_d = (_c = (0, execa_1.execa)('cypress', [
+                'run', '--component', '--spec', specArgs
+            ], { cwd: `${project}` })) === null || _c === void 0 ? void 0 : _c.stdout) === null || _d === void 0 ? void 0 : _d.pipe(process.stdout);
+        }
     }
 }
 exports.run = run;
