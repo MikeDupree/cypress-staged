@@ -9,6 +9,6 @@ if (config) {
   run(config);
 }
 else {
-  console.error("Missing cystaged.config.ts");
+  console.error("Missing cystaged.config.js");
 }
 

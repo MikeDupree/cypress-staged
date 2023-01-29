@@ -4,9 +4,9 @@ import fs from 'fs';
 const CONFIG_NAME = 'cystaged.config.js';
 
 export interface Config {
-  basePath: string,
-  projectPath: string,
+  projectsPath: string,
   include: string,
+  types: string[]
 }
 
 export function getConfig(rootDir: string = ''): Config | undefined {

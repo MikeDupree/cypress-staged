@@ -8,11 +8,11 @@ interface TestPath {
 }
 
 async function run(config: Config) {
-  const { include, projectPath } = config;
+  const { include, projectsPath } = config;
 
   // Config useful for monorepos with multiple projects,
   // each with their own config
-  const projectDirs = fg.sync(`${projectPath}/`, { onlyDirectories: true });
+  const projectDirs = fg.sync(`${projectsPath}/`, { onlyDirectories: true });
   const { stdout } = await execa('git', ['diff', '--name-only', '--cached']);
 
   // strip return characters
@@ -64,7 +64,7 @@ async function run(config: Config) {
   }
 
   // Run the tests for the staged files.
-  console.log('\x1b[32m%s\x1b[0m', pathsToTest);
+  console.log('Test paths found: \n \x1b[32m%s\x1b[0m', pathsToTest);
   for (const testPath of pathsToTest) {
     execa('cypress', [
       'run', '--spec', testPath.testPaths.join(',')
