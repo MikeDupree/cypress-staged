@@ -9,7 +9,7 @@ interface TestPath {
 
 async function run(config: Config) {
   const { include, projectsPath, types, cypressPath = './node_modules/.bin/cypress' } = config;
-  console.log({cypressPath});
+
   // Config useful for monorepos with multiple projects,
   // each with their own config
   const projectDirs = fg.sync(`${projectsPath}/`, { onlyDirectories: true });
