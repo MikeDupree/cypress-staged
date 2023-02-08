@@ -1,5 +1,3 @@
-import fs from 'fs';
-import path from 'path';
 import { execa } from '@esm2cjs/execa';
 import fg from 'fast-glob';
 import { Config } from '../utils/config';
@@ -10,8 +8,8 @@ interface TestPath {
 }
 
 async function run(config: Config) {
-  const { include, projectsPath, types } = config;
-
+  const { include, projectsPath, types, cypressPath = './node_modules/.bin/cypress' } = config;
+  console.log({cypressPath});
   // Config useful for monorepos with multiple projects,
   // each with their own config
   const projectDirs = fg.sync(`${projectsPath}/`, { onlyDirectories: true });
@@ -73,13 +71,13 @@ async function run(config: Config) {
     console.log('\x1b[36mfiles: \n %s\x1b[0m', specArgs);
 
     if (types.includes('e2e')) {
-      execa('cypress', [
+      execa(cypressPath, [
         'run', '--spec', specArgs
       ], { cwd: `${project}` })?.stdout?.pipe(process.stdout);
     }
 
     if (types.includes('component')) {
-      execa('cypress', [
+      execa(cypressPath, [
         'run', '--component', '--spec', specArgs
       ], { cwd: `${project}` })?.stdout?.pipe(process.stdout);
     }

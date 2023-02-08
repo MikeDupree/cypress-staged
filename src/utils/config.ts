@@ -6,7 +6,8 @@ const CONFIG_NAME = 'cystaged.config.js';
 export interface Config {
   projectsPath: string,
   include: string,
-  types: string[]
+  types: string[],
+  cypressPath?: string
 }
 
 export function getConfig(rootDir: string = ''): Config | undefined {

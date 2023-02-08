@@ -16,6 +16,7 @@ module.exports = {
   projectsPath: "ExampleProjects/*",
   include: "src",
   types: [ "component" ]
+  cypressPath: "./node_modules/.bin/cypress"
 };
 ```
 
@@ -24,6 +25,7 @@ The following configuration options are available:
 - `projectsPath`: The path to the projects, in case of a monorepo setup, where each project has its own Cypress configuration.
 - `include`: The directory to check for changes, and all staged files found within this directory will be tested.
 - `types`: An array of Cypress test types, including component, e2e, and unit.
+- `cypressPath`: (optional) The path to cypress executable. defaults to the projects `node_modules/.bin/cypress`
 
 ### How to use
 

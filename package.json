@@ -1,6 +1,6 @@
 {
   "name": "@mdupree/cypress-staged",
-  "version": "0.0.7",
+  "version": "0.1.7",
   "description": "Cypress test runner, test staged files",
   "repository": "https://github.com/MikeDupree/cypress-staged",
   "bin": {
@@ -10,8 +10,8 @@
     "bin/**"
   ],
   "scripts": {
-    "dev": "./bin/cypress-staged.js",
-    "build": "tsc && copyfiles -u 1 src/staged.txt bin",
+    "dev": "tsc && ./bin/cypress-staged.js",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "pre-publish": "tsc"
   },

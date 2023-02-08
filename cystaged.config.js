@@ -3,5 +3,6 @@ module.exports = {
   "include": "src",
   "types": [
     "component"
-  ]
+  ],
+  "cypressPath": './bad/path/cypress'
 }
