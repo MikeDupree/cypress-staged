@@ -1,6 +1,6 @@
 {
   "name": "@mdupree/cypress-staged",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Cypress test runner, test staged files",
   "repository": "https://github.com/MikeDupree/cypress-staged",
   "bin": {

@@ -1,5 +1,5 @@
 import React from 'react'
-// test
+//test
 type Props = {}
 
 const TestComponent = (props: Props) => {

@@ -4,5 +4,4 @@ module.exports = {
   "types": [
     "component"
   ],
-  "cypressPath": './bad/path/cypress'
 }

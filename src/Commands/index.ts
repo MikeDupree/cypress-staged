@@ -30,6 +30,11 @@ async function run(config: Config) {
       }
     }
 
+    // Check project contains cypress.
+    const projectCyConfig = fg.sync('cypress.*', { cwd: projectPath });
+    if (projectCyConfig.length <= 0) continue;
+
+    // Build project test object.
     if (projectPath) {
       // Strip project path from test path
       let filePath = file.replace(`${projectPath}/`, '');
